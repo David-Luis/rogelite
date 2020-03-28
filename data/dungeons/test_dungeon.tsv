@@ -1,0 +1,75 @@
+																																																								
+	F	F	F	F	F	F	F	F	F	F	F				F	F	F	F	F												F	F	F				F	F	F	F	F	F	F	F	F	F	F	F	F	F	F	F	F	F	F	
+											F				F		F		F												F	F	F				F																		F	
+	F	F	F	F	F	F	F	F	F		F				F		F		F								F	F	F	DR	F	F	F	DL	F	F	F		F	F	F	F	F	F	F	F	F						F	F	F	
+	F	F	F	F	F	F	F	F	F		F				F		F		F								F		F		F	F	F						F	F	F	F	F	F	F	F	F						F			
+	F	F	F	F	F	F	F	F	F		F	F	F	F	F		F		F		F	F	F	F	F	F	F		F		F	F	F						F	F	F	F	F	F	F	F	F	F	F	F	F		F		F	
+	F	F	F	F	F	F	F	F	F								F		F										F		F	F	F						F	F	F	F	F	F	F	F	F		F		F		F		F	
+	F	F	F	F	F	F	F	F	F	DL	F	F	F	F	F	F	F		F	F	F	F	F	F	F	F	F	F	F		F	F	F	DPL	F	F	F		F	F	F	F	F	F	F	F	F		F		F		F		F	
+					DT																										F	F	F		DB		DB														F		F		F	
+	F	F	F	F	F	F	F		F						F	F	F	F	F	F	F	F	F	F	F						F	F	F		F	F	F	F	F	DL	F	F	F	F	F	F	F	F	F	F	F		F	F	F	
+	F						F		F						F	F	F	F	F	F	F	F	F	F	F										F	F	F	F	F												F				F	
+	F						F	F	F						F	F	F	F	F	F	F	F	F	F	F		F	F	F						F	F	F	F	F	DL	F	F	F	F	F						F				F	
+	F						F								F	F	F	F	F	F	F	F	F	F	F		F								F	F	F	F	F						F						DB				F	
+	F		F	F	F	F	F		F	F	F	F	F	DR	F	F	F	F	F	F	F	F	F	F	F	DL	F	F	F	F	F	F	F		F	F	F	F	F		F	F	F	F	F	F	F	F	F		F	F	F		F	
+	F		F						F																								F								F	F	F	F	F	F	F	F	F		F	F	F		F	
+	F		F						F						F	F	F	F	F	F	F								F	F	F		F	F	F	F	F	F	F	DR	F	F	F	F	F	F	F	F	F		F	F	F		F	
+	F								F						F		F				F								F		F				F						F	F	F	F	F	F	F	F	F		F	F	F		F	
+	F	F	F	F	F	F	F	F	F						F		F				F	F	F	F	F				F		F	F	F	F	F		F	F	F	DR	F	F	F	F	F	F	F	F	F		F	F	F		F	
+	F														F		F								F				F				F								DST				DT						F	F	F		F	
+	F						F	F	F	F	F		F	F	F		F	F	F	F	F				F	F	F		F		F	F	F		F	F	F	F	F	F	F				F						F	F	F	DL	F	
+	F						F				F				F						DSB						F		F						F	F	F	F	F	F	F				F						F	F	F			
+	F						F		F	F	F	DR	F	F	F	F	F	F	F	F	F	F	F				F		F	F	F	F	F		F	F	F	F	F	F	F	DPL	F	F	F						F	F	F		F	
+	F						F						F	F	F	F	F	F	F	F	F	F	F				F						F		F	F	F	F	F	F	F										DPT				F	
+	F						F						F	F	F	F	F	F	F	F	F	F	F		F	F	F						F		F	F	F	F	F	F	F										F	F	F	F	F	
+	DB						F						F	F	F	F	F	F	F	F	F	F	F		F								F		F	F	F	F	F	F	F														F	
+	F	F	F	F	F	F	F	F	F	DPL	F		F	F	F	F	F	F	F	F	F	F	F		F		F	F	F	F	F	F	F		F	F	F	F	F	F	F	DSL	F	F	F	F	F	F	F		F	F	F		F	
+	F	F	F	F	F	F	F	F	F		F		F	F	F	F	F	F	F	F	F	F	F		F		F						DB		DT														F		F	F	F		F	
+	F	F	F	F	F	F	F	F	F	DL	F		F	F	F	F	F	F	F	F	F	F	F		F		F	F	F		F	F	F		F										F	F	F	F	F		F	F	F	DL	F	
+	F	F	F	F	F	F	F	F	F																F				F		F	F	F		F										F				F		F	F	F			
+	F	F	F	F	F	F	F	F	F		F	F	F	F	F	F	F	F	F						F				F		F	F	F		F		F	F	F						F		F	F	F		F	F	F		SDD	
+	F	F	F	F	F	F	F	F	F		F								F						F				F		DT				F		F								F						F	F	F		SD	
+	F	F	F	F	F	F	F	F	F		F								F						F	F	F		F		F				F		F		F	F	F	F	F		F						F	F	F		F	
+	F	F	F	F	F	F	F	F	F		F								F								F		F		DB				F		F		F	F	F	F	F		F						F	F	F		F	
+	F	F	F	F	F	F	F	F	F		F								F	F	F	F	F	F	F	F	F		F		F	F	F		F		F		F	F	F	F	F		F	F	F	F	F	DR	F	F	F		F	
+			F				F				F																		F		F	F	F		F		F		DST		DT										F	F	F		F	
+	F	F	F	F	F		F	F	F		F				F	F	F	F	F	F	F	F	F						F		F	F	F		F		F	F	F		F	F	F	F	F		F	F	F	DR	F	F	F	DL	F	
+									F		F				F	F	F	F	F	F	F	F	F						F		F	F	F		F		F								F		F		F						F	
+	F	F	F	F	F		F	F	F		F				F	F	F	F	F	F	F	F	F						F		F	F	F		F		F	F	F						F		F		F				F		F	
+	F				F		F		F		F				F	F	F	F	F	F	F	F	F						F		F	F	F		F				DB						F		F		F				F		F	
+	F		F	F	F	F	F		F		F				F	F	F	F	F	F	F	F	F						F		F	F	F		F		F	F	F	F	F	F	F		F		F		F				F	F	F	
+	F								F		F				F	F	F	F	F	F	F	F	F						F						F		F	F	F	F	F	F	F		F		F		F							
+	F	F	F	F	F		F		F		F				F	F	F	F	F	F	F	F	F	DL	F	F	F		F	F	F	F	F		F		F	F	F	F	F	F	F		F	F	F		F							
+	F				DB		F		F		F										DT						DB						F		F		F	F	F	F	F	F	F						DB							
+	F	DR	F	F	F		F		F		F										F	F	F	F	F	F	F	F	F				F		F		F	F	F	F	F	F	F	DL	F	DSR	F	F	F	F	F					
+	F		F	F	F		F		F		F										F	F	F	F	F	F	F	F	F				F		F		F	F	F	F	F	F	F				F	F	F	F	F					
+	F		F	F	F		F	F	F		F		F	F	F	F	F	F	F		F	F	F	F	F	F	F	F	F		F	F	F		F		F	F	F	F	F	F	F				F	F	F	F	F					
+	F		F	F	F						F		F	F	F	F	F	F	F		F	F	F	F	F	F	F	F	F		F		F		F		F	F	F	F	F	F	F													
+	F		F	F	F						F		F	F	F	F	F	F	F		F	F	F	F	F	F	F	F	F		F		F		F		F	F	F	F	F	F	F		F	F	F	F	F	F	F	F	F	F	F	
+			F	F	F						F		F	F	F	F	F	F	F		F	F	F	F	F	F	F	F	F		F				F								DT		F										F	
+	F	F	F	F	F		F	F	F	DL	F		F	F	F	F	F	F	F	DL	F	F	F	F	F	F	F	F	F		F		F	F	F		F	F	F	F	F	F	F		F				F	F	F	F	F		F	
+	F		F	F	F		F	F	F										DT		F	F	F	F	F	F	F	F	F		F		F										F		F				F	F	F	F	F		F	
+	F		F	F	F		F	F	F		F	F	F	F	F	F	F	F	F		F	F	F	F	F	F	F	F	F		F		F		F	F	F	F	F	F	F	DL	F		F	F	F		F	F	F	F	F		F	
+	F		F	F	F				DT		F										F	F	F	F	F	F	F	F	F		F		F		F	F	F	F	F	F	F						F		F	F	F	F	F		F	
+	F		F	F	F		F		F		F								F	DR	F	F	F	F	F	F	F	F	F		F		F		F	F	F	F	F	F	F	DL	F	F	F	F	F	DL	F	F	F	F	F		F	
+	F						F		F		F								F												F		F		F	F	F	F	F	F	F		F	F	F	F	F		F	F	F	F	F		F	
+	F	F	F	F	F	F	F		F		F				F	F	F	F	F	F	F										F		F		F	F	F	F	F	F	F		F	F	F	F	F		F	F	F	F	F		F	
+	F								F		F				F	F	F	F	F	F	F										F		F																						F	
+	F								F		F	F	F		F	F	F	F	F	F	F										F	F	F		F	F	F	F	F	F	F	F	F	F	F										F	
+	F								F				F								DT																DB								F										F	
+	F	F	F	F	F	F	F		F				F	F	F		F	F	F	F	F	F	F				F	F	F	F	F	DR	F	F	F	F	F	F	F	F	F		F		F										F	
+	F						F		F						F		F		F	F	F	F	F				F				F		F	F	F	F	F	F	F	F	F		F		F										F	
+	F		F	F	F		F		F	F	F	F	F	F	F		F		F	F	F	F	F				F	F	F		F		F	F	F	F	F	F	F	F	F		F		F	F	F	F	F	F	F				F	
+	F		F	F	F		F										F		F	F	F	F	F								F		F	F	F	F	F	F	F	F	F		F								F				F	
+	F	DR	F	F	F		F	F	F	F	F	F	F	F	F	F	F		F	F	F	F	F	DL	F						F		F	F	F	F	F	F	F	F	F		F	F	F		F	F	F	F	F				F	
+			F	F	F										F										F						F		F	F	F	F	F	F	F	F	F				F		F								F	
+	F		F	F	F										F		F	F	F	F	F	F	F	F	F						F		F	F	F	F	F	F	F	F	F		F	F	F		F		F	F	F				F	
+	F				DT										F		F														F												F		F		F		F	F	F				F	
+	F				F	F	F	F	F	F	F	F	F		F		F		F	DR	F	F	F	F	F	F	F	DL	F	F	F				F	F	F	F	F	F	F	F	F		F		F		F	F	F		F	F	F	
+	F				F	F	F	F	F	F	F	F	F		F		F		F		F	F	F	F	F	F	F								F				F						F		F		F	F	F		F			
+	F				F	F	F	F	F	F	F	F	F		F		F		F	DR	F	F	F	F	F	F	F								F		SUU		F		F	F	F	F	F		F		F	F	F		F			
+	F				F	F	F	F	F	F	F	F	F		F		F				F	F	F	F	F	F	F								F		SU		F								F				DPT		F			
+	F				F	F	F	F	F	F	F	F	F		F		F	F	F	DR	F	F	F	F	F	F	F								F		F		F								F				F	F	F			
+	F				DPT								DT		F																				F		F		F								F						F			
+	F	F	F	F	F	F	F	F	F	F	F	F	F		F	F	F	F	F	F	F	F	F	F	F	F	F	F	F	F	F	F	F	F	F	F	F		F	F	F	F	F	F	F	F	F	F	F	F	F	F	F			
+																																																								
