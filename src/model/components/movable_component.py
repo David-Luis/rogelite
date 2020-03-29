@@ -11,9 +11,13 @@ class MovementDirection(Enum):
 
 class MovableComponent(Component):
 
-    def __init__(self, dungeon, tile):
+    def __init__(self):
         Component.__init__(self, "MovableComponent")
+
+    def set_dungeon(self, dungeon):
         self.dungeon = dungeon
+
+    def set_tile(self, tile):
         self.tile = tile
 
     def try_move(self, direction):

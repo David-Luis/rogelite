@@ -8,7 +8,9 @@ class GameGraphics:
         self._floor_surface = pygame.image.load("data/textures/tile_floor.png").convert()
         self._wall_surface = pygame.image.load("data/textures/tile_wall.png").convert()
 
-        self.graphic_ids = {"player": pygame.image.load("data/textures/player.png").convert_alpha()}
+        self.graphic_ids = {"player": pygame.image.load("data/textures/player.png").convert_alpha(),
+                            "enemy1": pygame.image.load("data/textures/enemy1.png").convert_alpha()}
+
 
 
     def draw(self, dungeon, display_surface):
@@ -23,7 +25,9 @@ class GameGraphics:
 
                 for game_object in tile.game_objects:
                     for graphic_component in game_object.get_components_by_type("GraphicComponent"):
-                        display_surface.blit(self.graphic_ids[graphic_component.graphic_id], (position_x * 32, position_y * 32))
+
+                        if graphic_component.graphic_id in self.graphic_ids:
+                            display_surface.blit(self.graphic_ids[graphic_component.graphic_id], (position_x * 32, position_y * 32))
 
                 position_x += 1
 

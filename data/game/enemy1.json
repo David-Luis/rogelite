@@ -1,0 +1,6 @@
+{
+	"graphics": {
+		"texture_id": "enemy1"
+	},
+	"movable": "default"
+}
