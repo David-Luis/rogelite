@@ -31,11 +31,13 @@ class RogueliteGame(ApplicationBase):
         self.game_graphics = GameGraphics()
 
     def _update(self):
+        self.game_graphics.camera_x = (-self.player.get_components_by_type("MovableComponent")[0].tile.coords[1] * 32) + self.application_config.window_width / 2
+        self.game_graphics.camera_y = (-self.player.get_components_by_type("MovableComponent")[0].tile.coords[0] * 32) + self.application_config.window_height / 2
         pass
 
     def _render(self):
         self.game_graphics.draw(self.dungeon, self.main_surface)
-        self.display_surface.blit(self.main_surface, (0, 0))
+        #self.display_surface.blit(self.main_surface, (0, 0))
 
     def _on_event(self, event):
         ApplicationBase._on_event(self, event)

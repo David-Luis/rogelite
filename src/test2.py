@@ -18,7 +18,7 @@ class Test():
         GL.glClearColor(0.1, 0.1, 0.1, 1)
 
         #create camera
-        camera = Camera(600, 400, glm.vec3(0, 0, -1))
+        camera = Camera(600, 400, glm.vec3(0, 0, 0))
 
         #create mesh data
         vertex_data = numpy.array([
@@ -133,7 +133,7 @@ class Test():
             GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
 
             model_transform = glm.mat4()
-            model_transform = glm.translate(model_transform , glm.vec3(0.0, 0.0, -5.0))
+            model_transform = glm.translate(model_transform , glm.vec3(0.0, 0.0, -2.0))
             GL.shaders.glUseProgram(shader)
 
             GL.glBindTexture(GL.GL_TEXTURE_2D, texture)

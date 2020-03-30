@@ -5,6 +5,10 @@ import pygame
 class GameGraphics:
 
     def __init__(self):
+
+        self.camera_x = 0
+        self.camera_y = 0
+
         self._floor_surface = pygame.image.load("data/textures/tile_floor.png").convert()
         self._wall_surface = pygame.image.load("data/textures/tile_wall.png").convert()
 
@@ -18,16 +22,21 @@ class GameGraphics:
         for tile_row in dungeon.tiles:
             position_x = 0
             for tile in tile_row:
+                dungeon_surface = None
+
                 if tile.type is TileType.FLOOR:
-                    display_surface.blit(self._floor_surface, (position_x * 32, position_y * 32))
+                    dungeon_surface = self._floor_surface
                 elif tile.type is TileType.WALL:
-                    display_surface.blit(self._wall_surface, (position_x * 32, position_y * 32))
+                    dungeon_surface = self._wall_surface
+
+                if dungeon_surface:
+                    display_surface.blit(dungeon_surface, (position_x * 32 + self.camera_x, position_y * 32 + + self.camera_y))
 
                 for game_object in tile.game_objects:
                     for graphic_component in game_object.get_components_by_type("GraphicComponent"):
 
                         if graphic_component.graphic_id in self.graphic_ids:
-                            display_surface.blit(self.graphic_ids[graphic_component.graphic_id], (position_x * 32, position_y * 32))
+                            display_surface.blit(self.graphic_ids[graphic_component.graphic_id], (position_x * 32 + + self.camera_x, position_y * 32 + + self.camera_y))
 
                 position_x += 1
 

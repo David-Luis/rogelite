@@ -25,7 +25,10 @@ class Camera():
         return glm.lookAt(self.position, self.position + self.front, self.up)
 
     def get_projection_matrix(self):
-        return glm.perspective(glm.radians(self.fov), self.windows_width / self.windows_height, 0.1, 100.0)
+        return glm.perspective(glm.radians(self.fov), self.windows_width / self.windows_height, -1, 1)
+
+    def get_ortogonal_matrix(self):
+        return glm.ortho(-0.5, 0.5, -0.5, 0.5)
 
     def _update_camera_vectors(self):
         front = glm.vec3()
