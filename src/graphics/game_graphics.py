@@ -2,6 +2,7 @@ from src.model.tile import TileType
 
 import pygame
 
+
 class GameGraphics:
 
     def __init__(self):
@@ -22,11 +23,9 @@ class GameGraphics:
 
         self.debug_font = pygame.font.Font('data/fonts/debug_font.ttf', 26)
 
-
     def follow_game_object(self, game_object, window_width, window_height):
-        self.follow_game_object_x = (-game_object.get_components_by_type("MovableComponent")[0].tile.coords[1] * self.tile_size) + window_width / 2 - self.tile_size / 2
-        self.follow_game_object_y = (-game_object.get_components_by_type("MovableComponent")[0].tile.coords[0] * self.tile_size) + window_height / 2
-
+        self.follow_game_object_x = (-game_object.tile.coords[1] * self.tile_size) + window_width / 2 - self.tile_size / 2
+        self.follow_game_object_y = (-game_object.tile.coords[0] * self.tile_size) + window_height / 2
 
     def update(self):
         self.camera_x += (self.follow_game_object_x - self.camera_x) * 0.1

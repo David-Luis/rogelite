@@ -8,5 +8,8 @@
 	},
 	"attacker": {
 		"strength" : 1
+	},
+	"enemy": {
+		"behaviour" : "default"
 	}
 }

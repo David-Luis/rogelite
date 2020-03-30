@@ -14,11 +14,10 @@ class MovableComponent(Component):
 
     def __init__(self, game_object):
         Component.__init__(self, game_object, "MovableComponent")
-        self.tile = game_object.tile
         self.dungeon = game_object.dungeon
 
     def try_move_direction(self, direction):
-        new_position_coords = self.tile.coords[:]
+        new_position_coords = self.game_object.tile.coords[:]
         if direction is MovementDirection.LEFT:
             new_position_coords[1] -= 1
         elif direction is MovementDirection.RIGHT:
@@ -40,6 +39,6 @@ class MovableComponent(Component):
 
                     self._try_move_tile(requested_tile, False)
             else:
-                requested_tile.game_objects = self.tile.game_objects
-                self.tile.game_objects = []
-                self.tile = requested_tile
+                requested_tile.game_objects = self.game_object.tile.game_objects
+                self.game_object.tile.game_objects = []
+                self.game_object.tile = requested_tile

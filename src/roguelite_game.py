@@ -6,22 +6,29 @@ from src.graphics.game_graphics import GameGraphics
 
 import pygame
 
+
 class RogueliteGame(ApplicationBase):
     def __init__(self, config):
         ApplicationBase.__init__(self, config)
+        self._game_objects = []
 
-    def _add_game_object(self, file_definition, dungeon, row, col):
+    def _add_game_object(self, file_definition, row, col):
         game_object_tile = self.dungeon.tiles[row][col]
-        game_object = GameObject.from_json(file_definition, game_object_tile, dungeon)
+        game_object = GameObject.from_json(file_definition, game_object_tile, self.dungeon)
         game_object_tile.game_objects.append(game_object)
+        self._game_objects.append(game_object)
 
         return game_object
 
+    def _add_enemy_game_object(self, file_definition, row, col):
+        enemy_game_object = self._add_game_object(file_definition, row, col)
+        enemy_game_object.get_components_by_type("EnemyComponent")[0].set_player(self.player)
+
     def _init_model(self):
         self.dungeon = DungeonLoader.load_from_tsv("data/dungeons/test_dungeon.tsv")
-        self.player = self._add_game_object("data/game/player.json", self.dungeon, 3, 1)
+        self.player = self._add_game_object("data/game/player.json", 3, 1)
 
-        self._add_game_object("data/game/enemy1.json", self.dungeon, 3, 3)
+        self._add_enemy_game_object("data/game/enemy1.json", 4, 9)
 
     def _init_graphics(self):
         self.game_graphics = GameGraphics()
@@ -30,6 +37,19 @@ class RogueliteGame(ApplicationBase):
 
     def _update(self):
         self.game_graphics.update()
+
+    def _process_turn(self):
+        game_objects_to_destroy = []
+        for game_object in self._game_objects:
+            if not game_object.mark_as_destruct:
+                game_object.update()
+            else:
+                game_objects_to_destroy.append(game_object)
+
+        for game_object_to_destroy in game_objects_to_destroy:
+            game_object_to_destroy.destroy()
+            self._game_objects.remove(game_object_to_destroy)
+
 
     def _render(self):
         self.game_graphics.draw(self.dungeon, self.main_surface)
@@ -43,15 +63,21 @@ class RogueliteGame(ApplicationBase):
         if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
             self.player.get_components_by_type("MovableComponent")[0].try_move_direction(MovementDirection.LEFT)
             self.game_graphics.follow_game_object(self.player, self.application_config.window_width, self.application_config.window_height)
+            self._process_turn()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
             self.player.get_components_by_type("MovableComponent")[0].try_move_direction(MovementDirection.RIGHT)
             self.game_graphics.follow_game_object(self.player, self.application_config.window_width, self.application_config.window_height)
+            self._process_turn()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
             self.player.get_components_by_type("MovableComponent")[0].try_move_direction(MovementDirection.UP)
             self.game_graphics.follow_game_object(self.player, self.application_config.window_width, self.application_config.window_height)
+            self._process_turn()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
             self.player.get_components_by_type("MovableComponent")[0].try_move_direction(MovementDirection.DOWN)
             self.game_graphics.follow_game_object(self.player, self.application_config.window_width, self.application_config.window_height)
+            self._process_turn()
+        elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            self._process_turn()
 
     def initialize(self):
         ApplicationBase.initialize(self)

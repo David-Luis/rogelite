@@ -2,13 +2,17 @@ from src.model.components.graphic_component import GraphicComponent
 from src.model.components.movable_component import MovableComponent
 from src.model.components.destructible_component import DestructibleComponent
 from src.model.components.attacker_component import AttackerComponent
+from src.model.components.enemy_component import EnemyComponent
 
 import json
+
 
 class GameObject:
 
     def __init__(self):
         self._components = {}
+        self.mark_as_destruct = False
+        self.tile = None
 
     def add_component(self, component):
         if component.type not in self._components:
@@ -30,8 +34,16 @@ class GameObject:
             for component in self._components[component_type]:
                 component.act_on_game_object(game_object)
 
-    def destruct(self):
+    def mark_as_destroy(self):
+        self.mark_as_destruct = True
+
+    def destroy(self):
         self.tile.game_objects.remove(self)
+
+    def update(self):
+        for component_type in self._components:
+            for component in self._components[component_type]:
+                component.update()
 
     @classmethod
     def from_json(cls, json_file, tile, dungeon):
@@ -53,6 +65,9 @@ class GameObject:
 
             if "attacker" in game_object_info:
                 game_object.add_component(AttackerComponent(game_object, game_object_info["attacker"]["strength"]))
+
+            if "enemy" in game_object_info:
+                game_object.add_component(EnemyComponent(game_object, game_object_info["enemy"]["behaviour"]))
 
         return game_object
 

@@ -1,2 +1,12 @@
-- enemigo que se mueva, aunque sea algo muy basico (primero horizontal y luego vertical)
-- acciones de github
+- enemigo más avanzado
+	- al matarlo spawnea otros más pequeños
+	- sigue al player de verdad
+	- hacer a*?
+	- enemigo que explota
+	- enemigo que dispara a distancia
+	
+- animación de atacar
+- poderes y maná
+	
+- editor de mazmorras para hacer pruebas
+
