@@ -30,6 +30,9 @@ class ApplicationBase():
         GL.glBindTexture(GL.GL_TEXTURE_2D, self.game_texture)
         GL.glTexParameter(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST)
         GL.glTexParameter(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST)
+
+    def _use_pygame_texture(self):
+        w, h = self.main_surface.get_size()
         texture_info = pygame.image.tostring(self.main_surface, "RGBA", 1)
         GL.glTexImage2D(GL.GL_TEXTURE_2D, 0, 4, w, h, 0, GL.GL_RGBA, GL.GL_UNSIGNED_BYTE, texture_info)
 
@@ -117,7 +120,7 @@ class ApplicationBase():
         model_transform = glm.translate(model_transform, glm.vec3(0.0, 0.0, -1.0))
         GL.shaders.glUseProgram(self.shader)
 
-        self._create_render_texture()
+        self._use_pygame_texture()
         GL.glBindTexture(GL.GL_TEXTURE_2D, self.game_texture)
 
         transform_loc = GL.glGetUniformLocation(self.shader, "model")
@@ -164,6 +167,8 @@ class ApplicationBase():
         pass
 
     def _on_render(self):
+        self.main_surface.fill((0, 0, 0))
+
         self._render()
         self._render_game_texture()
         pygame.display.flip()

@@ -11,13 +11,9 @@ class RogueliteGame(ApplicationBase):
         ApplicationBase.__init__(self, config)
 
     def _add_game_object(self, file_definition, dungeon, row, col):
-        game_object = GameObject.from_json(file_definition)
         game_object_tile = self.dungeon.tiles[row][col]
+        game_object = GameObject.from_json(file_definition, game_object_tile, dungeon)
         game_object_tile.game_objects.append(game_object)
-
-        if game_object.get_components_by_type("MovableComponent"):
-            game_object.get_components_by_type("MovableComponent")[0].set_tile(game_object_tile)
-            game_object.get_components_by_type("MovableComponent")[0].set_dungeon(dungeon)
 
         return game_object
 
@@ -29,27 +25,33 @@ class RogueliteGame(ApplicationBase):
 
     def _init_graphics(self):
         self.game_graphics = GameGraphics()
+        self.game_graphics.follow_game_object(self.player, self.application_config.window_width,
+                                              self.application_config.window_height)
 
     def _update(self):
-        self.game_graphics.camera_x = (-self.player.get_components_by_type("MovableComponent")[0].tile.coords[1] * 32) + self.application_config.window_width / 2
-        self.game_graphics.camera_y = (-self.player.get_components_by_type("MovableComponent")[0].tile.coords[0] * 32) + self.application_config.window_height / 2
-        pass
+        self.game_graphics.update()
 
     def _render(self):
         self.game_graphics.draw(self.dungeon, self.main_surface)
-        #self.display_surface.blit(self.main_surface, (0, 0))
+
+        if self.game_graphics.show_debug_graphics:
+            self.game_graphics.draw_debug(self.dungeon, self.main_surface)
 
     def _on_event(self, event):
         ApplicationBase._on_event(self, event)
 
         if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
-            self.player.get_components_by_type("MovableComponent")[0].try_move(MovementDirection.LEFT)
+            self.player.get_components_by_type("MovableComponent")[0].try_move_direction(MovementDirection.LEFT)
+            self.game_graphics.follow_game_object(self.player, self.application_config.window_width, self.application_config.window_height)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-            self.player.get_components_by_type("MovableComponent")[0].try_move(MovementDirection.RIGHT)
+            self.player.get_components_by_type("MovableComponent")[0].try_move_direction(MovementDirection.RIGHT)
+            self.game_graphics.follow_game_object(self.player, self.application_config.window_width, self.application_config.window_height)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
-            self.player.get_components_by_type("MovableComponent")[0].try_move(MovementDirection.UP)
+            self.player.get_components_by_type("MovableComponent")[0].try_move_direction(MovementDirection.UP)
+            self.game_graphics.follow_game_object(self.player, self.application_config.window_width, self.application_config.window_height)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
-            self.player.get_components_by_type("MovableComponent")[0].try_move(MovementDirection.DOWN)
+            self.player.get_components_by_type("MovableComponent")[0].try_move_direction(MovementDirection.DOWN)
+            self.game_graphics.follow_game_object(self.player, self.application_config.window_width, self.application_config.window_height)
 
     def initialize(self):
         ApplicationBase.initialize(self)

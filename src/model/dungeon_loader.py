@@ -20,7 +20,6 @@ class DungeonLoader:
                     current_tiles.append(cls._get_tile(tile_info, [current_row, current_col]))
                     current_col += 1
 
-                #print(current_tile_row)
                 dungeon.tiles.append(current_tiles)
                 current_row += 1
 

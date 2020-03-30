@@ -1,0 +1,2 @@
+- enemigo que se mueva, aunque sea algo muy basico (primero horizontal y luego vertical)
+- acciones de github

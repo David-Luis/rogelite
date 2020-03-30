@@ -9,18 +9,15 @@ class MovementDirection(Enum):
     UP = 3
     DOWN = 4
 
+
 class MovableComponent(Component):
 
-    def __init__(self):
-        Component.__init__(self, "MovableComponent")
+    def __init__(self, game_object):
+        Component.__init__(self, game_object, "MovableComponent")
+        self.tile = game_object.tile
+        self.dungeon = game_object.dungeon
 
-    def set_dungeon(self, dungeon):
-        self.dungeon = dungeon
-
-    def set_tile(self, tile):
-        self.tile = tile
-
-    def try_move(self, direction):
+    def try_move_direction(self, direction):
         new_position_coords = self.tile.coords[:]
         if direction is MovementDirection.LEFT:
             new_position_coords[1] -= 1
@@ -32,8 +29,17 @@ class MovableComponent(Component):
             new_position_coords[0] += 1
 
         requested_tile = self.dungeon.tiles[new_position_coords[0]][new_position_coords[1]]
+        self._try_move_tile(requested_tile, can_act_on_game_object=True)
 
+    def _try_move_tile(self, requested_tile, can_act_on_game_object):
         if requested_tile.type is TileType.FLOOR:
-            requested_tile.game_objects = self.tile.game_objects
-            self.tile.game_objects = []
-            self.tile = requested_tile
+            if requested_tile.game_objects:
+                if can_act_on_game_object:
+                    for game_object in requested_tile.game_objects:
+                        self.game_object.act_on_other_game_object(game_object)
+
+                    self._try_move_tile(requested_tile, False)
+            else:
+                requested_tile.game_objects = self.tile.game_objects
+                self.tile.game_objects = []
+                self.tile = requested_tile

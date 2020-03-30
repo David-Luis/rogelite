@@ -2,5 +2,11 @@
 	"graphics": {
 		"texture_id": "enemy1"
 	},
-	"movable": "default"
+	"movable": "default",
+	"destructible": {
+		"life": 100
+	},
+	"attacker": {
+		"strength" : 1
+	}
 }
