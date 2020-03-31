@@ -1,13 +1,15 @@
-from src.engine.Camera import Camera
+import ctypes
 
 import glm
-import ctypes
-import pygame
 import numpy
-from pygame.constants import *
+import pygame
 from OpenGL import GL
 from OpenGL.GL import shaders
 from OpenGL.raw.GL import _types
+from pygame.constants import *
+
+from src.engine.pygame.Camera import Camera
+
 
 class Test():
     def start_test(self):

@@ -7,6 +7,6 @@
 		"life": 100
 	},
 	"attacker": {
-		"strength" : 50
+		"strength" : 100
 	}
 }

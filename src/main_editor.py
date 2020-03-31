@@ -1,11 +1,11 @@
 from src.application_base import ApplicationConfig
-from src.roguelite_game import RogueliteGame
+from src.editor.editor_application import EditorApplication
 
 if __name__ == '__main__':
     applicationConfig = ApplicationConfig()
     applicationConfig.window_width = 1366
     applicationConfig.window_height = 768
-    applicationConfig.window_title = "Roguelite"
-    game = RogueliteGame(applicationConfig)
+    applicationConfig.window_title = "Roguelite Editor"
+    game = EditorApplication(applicationConfig)
     game.initialize()
     game.game_loop()

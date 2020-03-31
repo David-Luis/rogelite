@@ -1,4 +1,6 @@
-- separar aún más el render de pygame en el, hacer un pygame_application y que roguelite_application herede
+- editor de mazmorras para hacer pruebas
+	ver como integrarlo en mi herencia de clases
+	https://github.com/mrexodia/pygame_qt/blob/master/game.py
 
 - enemigo más avanzado
 	- al matarlo spawnea otros más pequeños
@@ -9,6 +11,4 @@
 	
 - animación de atacar
 - poderes y maná
-	
-- editor de mazmorras para hacer pruebas
 

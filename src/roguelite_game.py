@@ -1,15 +1,15 @@
-from application_base import ApplicationBase
-from src.model.dungeon_loader import DungeonLoader
-from src.model.game_object import GameObject
-from src.model.components.movable_component import MovementDirection
-from src.graphics.game_graphics import GameGraphics
-
 import pygame
 
+from src.engine.pygame.pygame_application import PyGameApplication
+from src.graphics.game_graphics import GameGraphics
+from src.model.components.movable_component import MovementDirection
+from src.model.dungeon_loader import DungeonLoader
+from src.model.game_object import GameObject
 
-class RogueliteGame(ApplicationBase):
+
+class RogueliteGame(PyGameApplication):
     def __init__(self, config):
-        ApplicationBase.__init__(self, config)
+        PyGameApplication.__init__(self, config)
         self._game_objects = []
 
     def _add_game_object(self, file_definition, row, col):
@@ -58,7 +58,7 @@ class RogueliteGame(ApplicationBase):
             self.game_graphics.draw_debug(self.dungeon, self.main_surface)
 
     def _on_event(self, event):
-        ApplicationBase._on_event(self, event)
+        PyGameApplication._on_event(self, event)
 
         if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
             self.player.get_components_by_type("MovableComponent")[0].try_move_direction(MovementDirection.LEFT)
@@ -80,7 +80,7 @@ class RogueliteGame(ApplicationBase):
             self._process_turn()
 
     def initialize(self):
-        ApplicationBase.initialize(self)
+        PyGameApplication.initialize(self)
         self._init_model()
         self._init_graphics();
 
