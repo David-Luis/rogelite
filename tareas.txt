@@ -1,3 +1,5 @@
+- separar aún más el render de pygame en el, hacer un pygame_application y que roguelite_application herede
+
 - enemigo más avanzado
 	- al matarlo spawnea otros más pequeños
 	- sigue al player de verdad
