@@ -1,14 +1,18 @@
+- usar los eventos para flipear al player según donde mira
+- animación de atacar usando los eventos y así que funcione la dirección
+- tema de cuando muere crear otro game_object que no puede tocarse y que es una animación de morir
+
 - editor de mazmorras para hacer pruebas
 	ver como integrarlo en mi herencia de clases
 	https://github.com/mrexodia/pygame_qt/blob/master/game.py
 
 - enemigo más avanzado
-	- al matarlo spawnea otros más pequeños
 	- sigue al player de verdad
 	- hacer a*?
 	- enemigo que explota
 	- enemigo que dispara a distancia
 	
-- animación de atacar
 - poderes y maná
+- para evitar cargar de un fichero, 1. guardar en memoria, 2. cargar enemigos, 3. borrar memoria
+- tema de las layers
 

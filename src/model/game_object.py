@@ -3,16 +3,18 @@ from src.model.components.movable_component import MovableComponent
 from src.model.components.destructible_component import DestructibleComponent
 from src.model.components.attacker_component import AttackerComponent
 from src.model.components.enemy_component import EnemyComponent
+from src.model.components.enemy_spawner_component import EnemySpawnerComponent
 
 import json
 
 
 class GameObject:
 
-    def __init__(self):
+    def __init__(self, game_objects_factory_cls):
         self._components = {}
         self.mark_as_destruct = False
         self.tile = None
+        self.game_objects_factory_cls = game_objects_factory_cls
 
     def add_component(self, component):
         if component.type not in self._components:
@@ -38,16 +40,29 @@ class GameObject:
         self.mark_as_destruct = True
 
     def destroy(self):
+        for component_type in self._components:
+            for component in self._components[component_type]:
+                component.on_destroy()
+
         self.tile.game_objects.remove(self)
 
-    def update(self):
+    def process_turn(self):
         for component_type in self._components:
             for component in self._components[component_type]:
                 component.update()
 
+    def update(self, delta_time):
+        pass
+
+    def on_create(self):
+        pass
+
+    def on_component_event(self, event):
+        pass
+
     @classmethod
-    def from_json(cls, json_file, tile, dungeon):
-        game_object = GameObject()
+    def from_json(cls, game_object_factory_cls, json_file, tile, dungeon):
+        game_object = cls(game_object_factory_cls)
 
         with open(json_file) as json_data:
             game_object_info = json.load(json_data)
@@ -68,6 +83,11 @@ class GameObject:
 
             if "enemy" in game_object_info:
                 game_object.add_component(EnemyComponent(game_object, game_object_info["enemy"]["behaviour"]))
+
+            if "enemy_spawner" in game_object_info:
+                game_object.add_component(EnemySpawnerComponent(game_object, game_object_info["enemy_spawner"]["enemy"]))
+
+        game_object.on_create()
 
         return game_object
 

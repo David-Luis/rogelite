@@ -4,7 +4,8 @@ from src.engine.pygame.pygame_application import PyGameApplication
 from src.graphics.game_graphics import GameGraphics
 from src.model.components.movable_component import MovementDirection
 from src.model.dungeon_loader import DungeonLoader
-from src.model.game_object import GameObject
+from src.game.game_objects_factory import GameObjectsFactory
+from src.game.player import Player
 
 
 class RogueliteGame(PyGameApplication):
@@ -12,23 +13,14 @@ class RogueliteGame(PyGameApplication):
         PyGameApplication.__init__(self, config)
         self._game_objects = []
 
-    def _add_game_object(self, file_definition, row, col):
-        game_object_tile = self.dungeon.tiles[row][col]
-        game_object = GameObject.from_json(file_definition, game_object_tile, self.dungeon)
-        game_object_tile.game_objects.append(game_object)
-        self._game_objects.append(game_object)
-
-        return game_object
-
-    def _add_enemy_game_object(self, file_definition, row, col):
-        enemy_game_object = self._add_game_object(file_definition, row, col)
-        enemy_game_object.get_components_by_type("EnemyComponent")[0].set_player(self.player)
-
     def _init_model(self):
         self.dungeon = DungeonLoader.load_from_tsv("data/dungeons/test_dungeon.tsv")
-        self.player = self._add_game_object("data/game/player.json", 3, 1)
+        GameObjectsFactory.init(self._game_objects, self.dungeon)
+        self.player = GameObjectsFactory.add_game_object_using_cls(Player, "data/game/player.json", 3, 1)
+        GameObjectsFactory.set_player(self.player)
 
-        self._add_enemy_game_object("data/game/enemy1.json", 4, 9)
+        GameObjectsFactory.add_enemy_game_object("data/game/enemy1.json", 4, 5)
+        GameObjectsFactory.add_enemy_game_object("data/game/enemy2.json", 7, 9)
 
     def _init_graphics(self):
         self.game_graphics = GameGraphics()
@@ -36,13 +28,17 @@ class RogueliteGame(PyGameApplication):
                                               self.application_config.window_height)
 
     def _update(self):
+        PyGameApplication._update(self)
+
+        for game_object in self._game_objects:
+            game_object.update(self.delta_time)
         self.game_graphics.update()
 
     def _process_turn(self):
         game_objects_to_destroy = []
-        for game_object in self._game_objects:
+        for game_object in self._game_objects[:]:
             if not game_object.mark_as_destruct:
-                game_object.update()
+                game_object.process_turn()
             else:
                 game_objects_to_destroy.append(game_object)
 

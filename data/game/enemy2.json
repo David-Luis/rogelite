@@ -1,0 +1,18 @@
+{
+	"graphics": {
+		"texture_id": "enemy2"
+	},
+	"movable": "default",
+	"destructible": {
+		"life": 100
+	},
+	"attacker": {
+		"strength" : 1
+	},
+	"enemy": {
+		"behaviour" : "default"
+	},
+	"enemy_spawner": {
+		"enemy" : "data/game/enemy2_small.json"
+	}
+}

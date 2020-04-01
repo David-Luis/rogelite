@@ -1,0 +1,15 @@
+{
+	"graphics": {
+		"texture_id": "enemy2_small"
+	},
+	"movable": "default",
+	"destructible": {
+		"life": 100
+	},
+	"attacker": {
+		"strength" : 1
+	},
+	"enemy": {
+		"behaviour" : "default"
+	}
+}

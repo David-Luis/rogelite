@@ -34,7 +34,7 @@ class MovableComponent(Component):
         if requested_tile.type is TileType.FLOOR:
             if requested_tile.game_objects:
                 if can_act_on_game_object:
-                    for game_object in requested_tile.game_objects:
+                    for game_object in requested_tile.game_objects[:]:
                         self.game_object.act_on_other_game_object(game_object)
 
                     self._try_move_tile(requested_tile, False)

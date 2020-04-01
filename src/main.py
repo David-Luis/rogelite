@@ -1,5 +1,5 @@
 from src.application_base import ApplicationConfig
-from src.roguelite_game import RogueliteGame
+from src.game.roguelite_game import RogueliteGame
 
 if __name__ == '__main__':
     applicationConfig = ApplicationConfig()

@@ -10,3 +10,6 @@ class Component:
     def act_on_game_object(self, game_object):
         pass
 
+    def on_destroy(self):
+        pass
+

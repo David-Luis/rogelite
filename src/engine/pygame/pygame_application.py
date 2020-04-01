@@ -19,6 +19,8 @@ class PyGameApplication(ApplicationBase):
         self.main_surface = None
         self.running = True
         self.timer = pygame.time.Clock()
+        self.delta_time = 0
+        self.ticks_last_frame = 0
 
     def _create_render_texture(self):
         w, h = self.main_surface.get_size()
@@ -158,6 +160,9 @@ class PyGameApplication(ApplicationBase):
             self.running = False
 
     def _update(self):
+        ticks = pygame.time.get_ticks()
+        self.delta_time = (ticks - self.ticks_last_frame) / 1000.0
+        self.ticks_last_frame = ticks
         pass
 
     def _render(self):
