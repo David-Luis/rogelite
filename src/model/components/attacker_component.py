@@ -10,4 +10,4 @@ class AttackerComponent(Component):
         if game_object.has_component_of_type("DestructibleComponent"):
             for destructible_component in game_object.get_components_by_type("DestructibleComponent"):
                 destructible_component.receive_attack(self.strength)
-                self.game_object.on_component_event("attack")
+                self.game_object.on_component_event({"name": "attack"})

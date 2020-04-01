@@ -18,7 +18,7 @@ class Player(GameObject):
                 self.attacking = False
 
     def on_component_event(self, event):
-        if event == "attack":
+        if event["name"] == "attack":
             self.attack()
 
     def attack(self):

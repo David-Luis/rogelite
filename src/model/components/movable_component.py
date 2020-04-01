@@ -42,3 +42,4 @@ class MovableComponent(Component):
                 requested_tile.game_objects = self.game_object.tile.game_objects
                 self.game_object.tile.game_objects = []
                 self.game_object.tile = requested_tile
+                self.game_object.on_component_event({"move": ""}) #todo: add direction
