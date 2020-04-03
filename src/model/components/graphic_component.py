@@ -8,6 +8,8 @@ class GraphicComponent(Component):
         self.graphic_id = graphic_id
         self.local_pos = [0,0]
         self.layer = 1
+        self.flipped = False
+        self.visible = True
 
 
 

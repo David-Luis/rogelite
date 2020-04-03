@@ -6,6 +6,7 @@ from src.model.components.movable_component import MovementDirection
 from src.model.dungeon_loader import DungeonLoader
 from src.game.game_objects_factory import GameObjectsFactory
 from src.game.player import Player
+from src.game.enemy import Enemy
 
 
 class RogueliteGame(PyGameApplication):

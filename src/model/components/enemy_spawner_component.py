@@ -1,5 +1,6 @@
 from src.model.components.component import Component
 
+
 class EnemySpawnerComponent(Component):
 
     def __init__(self, game_object, enemy_def):

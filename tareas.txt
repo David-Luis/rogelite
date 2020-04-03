@@ -1,5 +1,4 @@
-- usar los eventos para flipear al player según donde mira
-- animación de atacar usando los eventos y así que funcione la dirección
+- refactorizar copy/paste en player y enemy
 - tema de cuando muere crear otro game_object que no puede tocarse y que es una animación de morir
 
 - editor de mazmorras para hacer pruebas

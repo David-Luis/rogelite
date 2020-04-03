@@ -1,5 +1,6 @@
 from src.model.game_object import GameObject
 from src.model.tile import TileType
+from src.game.enemy import Enemy
 
 class GameObjectsFactory():
 
@@ -30,7 +31,7 @@ class GameObjectsFactory():
 
     @classmethod
     def add_enemy_game_object(cls, file_definition, row, col):
-        enemy_game_object = cls.add_game_object(file_definition, row, col)
+        enemy_game_object = cls.add_game_object_using_cls(Enemy, file_definition, row, col)
 
         if enemy_game_object:
             enemy_game_object.get_components_by_type("EnemyComponent")[0].set_player(cls._player)

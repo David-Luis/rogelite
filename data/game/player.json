@@ -1,4 +1,5 @@
 {
+	"type": "player",
 	"graphics": {
 		"texture_id": "player"
 	},
@@ -7,6 +8,7 @@
 		"life": 100
 	},
 	"attacker": {
-		"strength" : 100
+		"strength" : 100,
+		"can_attack_types" : ["enemy"]
 	}
 }

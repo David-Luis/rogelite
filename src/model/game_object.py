@@ -68,6 +68,7 @@ class GameObject:
             game_object_info = json.load(json_data)
             game_object.tile = tile
             game_object.dungeon = dungeon
+            game_object.type = game_object_info["type"]
 
             if "graphics" in game_object_info:
                 game_object.add_component(GraphicComponent(game_object, game_object_info["graphics"]["texture_id"]))
@@ -79,7 +80,7 @@ class GameObject:
                 game_object.add_component(DestructibleComponent(game_object, game_object_info["destructible"]["life"]))
 
             if "attacker" in game_object_info:
-                game_object.add_component(AttackerComponent(game_object, game_object_info["attacker"]["strength"]))
+                game_object.add_component(AttackerComponent(game_object, game_object_info["attacker"]["strength"], game_object_info["attacker"]["can_attack_types"]))
 
             if "enemy" in game_object_info:
                 game_object.add_component(EnemyComponent(game_object, game_object_info["enemy"]["behaviour"]))

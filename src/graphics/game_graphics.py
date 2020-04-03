@@ -55,12 +55,17 @@ class GameGraphics:
                     for game_object in tile.game_objects:
                         for graphic_component in game_object.get_components_by_type("GraphicComponent"):
 
-                            if graphic_component.graphic_id in self.graphic_ids and graphic_component.layer == layer:
+                            if graphic_component.graphic_id in self.graphic_ids and graphic_component.layer == layer and graphic_component.visible:
                                 size = self.graphic_ids[graphic_component.graphic_id].get_rect().size
                                 height = size[1]
                                 draw_x = position_x * self.tile_size + self.camera_x + graphic_component.local_pos[0]
                                 draw_y = position_y * self.tile_size + + self.camera_y - (height - self.tile_size) + graphic_component.local_pos[1]
-                                display_surface.blit(self.graphic_ids[graphic_component.graphic_id], (draw_x, draw_y))
+
+                                image = self.graphic_ids[graphic_component.graphic_id]
+                                if graphic_component.flipped:
+                                    display_surface.blit(pygame.transform.flip(image, True, False), (draw_x, draw_y))
+                                else:
+                                    display_surface.blit(image, (draw_x, draw_y))
 
                     position_x += 1
 
