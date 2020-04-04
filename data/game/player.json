@@ -10,5 +10,8 @@
 	"attacker": {
 		"strength" : 100,
 		"can_attack_types" : ["enemy"]
+	},
+	"player": {
+		"behaviour" : "default"
 	}
 }

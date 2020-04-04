@@ -1,0 +1,10 @@
+{
+	"textures": [
+			{"path": "data/textures/tile_floor.png", "alpha": false},
+			{"path": "data/textures/tile_wall.png", "alpha": false},
+			{"path": "data/textures/player.png"},
+			{"path": "data/textures/enemy1.png"},
+			{"path": "data/textures/enemy2.png"},
+			{"path": "data/textures/enemy2_small.png"}
+	]
+}

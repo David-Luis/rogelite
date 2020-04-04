@@ -5,7 +5,8 @@
 	},
 	"movable": "default",
 	"destructible": {
-		"life": 100
+		"life": 100,
+		"create_when_destroy": "data/game/dead_body.json"
 	},
 	"attacker": {
 		"strength" : 1,

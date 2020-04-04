@@ -1,0 +1,11 @@
+{
+	"type": "default",
+	"graphics": {
+		"texture_id": "dead_animation_tex",
+		"is_animated": true,
+		"animation_data": "data/textures/dead_animation"
+	},
+	"delete_in_time": {
+		"seconds": 2
+	}
+}

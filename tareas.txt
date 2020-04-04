@@ -1,5 +1,9 @@
-- refactorizar copy/paste en player y enemy
-- tema de cuando muere crear otro game_object que no puede tocarse y que es una animación de morir
+- sprite sheet:
+	- quitar la diferencia de sprite y spriteanimated, lo debería saber a partir del _animated del gameobject, o simplemente que pregunte get_current_frame
+	
+- hacer un dict_utils, y usar un get_or_default
+
+- calidad
 
 - editor de mazmorras para hacer pruebas
 	ver como integrarlo en mi herencia de clases
@@ -11,6 +15,7 @@
 	- enemigo que explota
 	- enemigo que dispara a distancia
 	
+- añadir el concepto de escena, que tiene unos assets concretos que cargar y descagar
 - poderes y maná
 - para evitar cargar de un fichero, 1. guardar en memoria, 2. cargar enemigos, 3. borrar memoria
 - tema de las layers

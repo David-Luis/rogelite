@@ -1,4 +1,7 @@
 from src.model.tile import TileType
+from src.graphics.sprite import Sprite
+from src.graphics.sprite_animated import SpriteAnimated
+from src.game.assets_manager import AssetsManager
 
 import pygame
 
@@ -15,14 +18,6 @@ class GameGraphics:
         self.camera_x = 0
         self.camera_y = 0
 
-        self._floor_surface = pygame.image.load("data/textures/tile_floor.png").convert()
-        self._wall_surface = pygame.image.load("data/textures/tile_wall.png").convert()
-
-        self.graphic_ids = {"player": pygame.image.load("data/textures/player.png"),
-                            "enemy1": pygame.image.load("data/textures/enemy1.png"),
-                            "enemy2": pygame.image.load("data/textures/enemy2.png"),
-                            "enemy2_small": pygame.image.load("data/textures/enemy2_small.png")}
-
         self.debug_font = pygame.font.Font('data/fonts/debug_font.ttf', 26)
 
         self.layers = [0,1]
@@ -35,37 +30,44 @@ class GameGraphics:
         self.camera_x += (self.follow_game_object_x - self.camera_x) * 0.1
         self.camera_y += (self.follow_game_object_y - self.camera_y) * 0.1
 
-    def draw(self, dungeon, display_surface):
+    def draw(self, dungeon, display_surface, delta_time):
 
         for layer in self.layers:
             position_y = 0
             for tile_col in dungeon.tiles:
                 position_x = 0
                 for tile in tile_col:
-                    dungeon_surface = None
+                    dungeon_sprite = None
 
                     if tile.type is TileType.FLOOR and layer == 0:
-                        dungeon_surface = self._floor_surface
+                        dungeon_sprite = AssetsManager.get_sprite("tile_floor")
                     elif tile.type is TileType.WALL and layer == 1:
-                        dungeon_surface = self._wall_surface
+                        dungeon_sprite = AssetsManager.get_sprite("tile_wall")
 
-                    if dungeon_surface:
-                        display_surface.blit(dungeon_surface, (position_x * self.tile_size + self.camera_x, position_y * self.tile_size + + self.camera_y))
+                    if dungeon_sprite:
+                        dungeon_sprite.blit(display_surface, (position_x * self.tile_size + self.camera_x, position_y * self.tile_size + + self.camera_y))
 
                     for game_object in tile.game_objects:
-                        for graphic_component in game_object.get_components_by_type("GraphicComponent"):
+                        for graphic_component in game_object.get_components_of_type("GraphicComponent"):
 
-                            if graphic_component.graphic_id in self.graphic_ids and graphic_component.layer == layer and graphic_component.visible:
-                                size = self.graphic_ids[graphic_component.graphic_id].get_rect().size
-                                height = size[1]
+                            if graphic_component.layer == layer and graphic_component.visible:
+                                if graphic_component._animated:
+                                    sprite = AssetsManager.get_animation(graphic_component.graphic_id)
+                                else:
+                                    sprite = AssetsManager.get_sprite(graphic_component.graphic_id)
+
+                                if graphic_component._animated:
+                                    height = graphic_component.get_size()[1]
+                                else:
+                                    height =  sprite.get_current_surface().get_rect().size[1]
                                 draw_x = position_x * self.tile_size + self.camera_x + graphic_component.local_pos[0]
                                 draw_y = position_y * self.tile_size + + self.camera_y - (height - self.tile_size) + graphic_component.local_pos[1]
 
-                                image = self.graphic_ids[graphic_component.graphic_id]
+
                                 if graphic_component.flipped:
-                                    display_surface.blit(pygame.transform.flip(image, True, False), (draw_x, draw_y))
+                                    sprite.blit_flipped(display_surface, (draw_x, draw_y), graphic_component)
                                 else:
-                                    display_surface.blit(image, (draw_x, draw_y))
+                                    sprite.blit(display_surface, (draw_x, draw_y), graphic_component)
 
                     position_x += 1
 
@@ -85,13 +87,13 @@ class GameGraphics:
 
     def _draw_debug_for_game_object(self, display_surface, game_object, position_x, position_y):
         if game_object.has_component_of_type("DestructibleComponent"):
-            graphic_component = game_object.get_components_by_type("GraphicComponent")[0]
+            graphic_component = game_object.get_components_of_type("GraphicComponent")[0]
 
-            life = game_object.get_components_by_type("DestructibleComponent")[0].life
+            life = game_object.get_components_of_type("DestructibleComponent")[0].life
             white = (255, 255, 255)
             text = self.debug_font.render("{}".format(life), True, white)
             textRect = text.get_rect()
-            size = self.graphic_ids[graphic_component.graphic_id].get_rect().size
+            size = AssetsManager.get_sprite(graphic_component.graphic_id).get_current_surface().get_rect().size
             height = size[1]
             draw_x = position_x * self.tile_size + self.camera_x + self.tile_size*0.5
             draw_y = position_y * self.tile_size + self.camera_y + self.tile_size - height - 5
