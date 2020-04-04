@@ -1,7 +1,5 @@
 - sprite sheet:
 	- quitar la diferencia de sprite y spriteanimated, lo debería saber a partir del _animated del gameobject, o simplemente que pregunte get_current_frame
-	
-- hacer un dict_utils, y usar un get_or_default
 
 - calidad
 

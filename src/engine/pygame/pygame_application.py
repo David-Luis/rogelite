@@ -130,7 +130,6 @@ class PyGameApplication(ApplicationBase):
 
         projection_loc = GL.glGetUniformLocation(self.shader, "projection")
         GL.glUniformMatrix4fv(projection_loc, 1, GL.GL_FALSE, glm.value_ptr(self.camera_3d.get_ortogonal_matrix()))
-        #GL.glUniformMatrix4fv(projection_loc, 1, GL.GL_FALSE, glm.value_ptr(self.camera_3d.get_projection_matrix()))
 
         GL.glBindVertexArray(self.VAO)
         GL.glDrawElements(GL.GL_TRIANGLES, self.index_data.size, GL.GL_UNSIGNED_INT, None)

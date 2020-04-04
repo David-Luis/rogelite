@@ -92,10 +92,10 @@ class GameGraphics:
             life = game_object.get_components_of_type("DestructibleComponent")[0].life
             white = (255, 255, 255)
             text = self.debug_font.render("{}".format(life), True, white)
-            textRect = text.get_rect()
+            text_rect = text.get_rect()
             size = AssetsManager.get_sprite(graphic_component.graphic_id).get_current_surface().get_rect().size
             height = size[1]
             draw_x = position_x * self.tile_size + self.camera_x + self.tile_size*0.5
             draw_y = position_y * self.tile_size + self.camera_y + self.tile_size - height - 5
-            textRect.center = (draw_x, draw_y)
-            display_surface.blit(text, textRect)
+            text_rect.center = (draw_x, draw_y)
+            display_surface.blit(text, text_rect)

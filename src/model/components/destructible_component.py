@@ -7,9 +7,7 @@ class DestructibleComponent(Component):
         Component.__init__(self, game_object, "DestructibleComponent")
         self.life = descriptor["life"]
 
-        self.create_when_destroy = None
-        if "create_when_destroy" in descriptor:
-            self.create_when_destroy = descriptor["create_when_destroy"]
+        self.create_when_destroy = descriptor.get("create_when_destroy", None)
 
     def receive_attack(self, strength):
         self.life -= strength

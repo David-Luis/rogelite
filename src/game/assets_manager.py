@@ -19,10 +19,7 @@ class AssetsManager:
                 id = os.path.splitext(os.path.basename(texture_definition_info["path"]))[0]
                 path = texture_definition_info["path"]
 
-                alpha = True
-                if "alpha" in texture_definition_info:
-                    alpha = texture_definition_info["alpha"]
-
+                alpha = texture_definition_info.get("alpha", True)
                 cls.texture_definitions[id] = {"path": path, "alpha": alpha}
 
     @classmethod
@@ -33,10 +30,7 @@ class AssetsManager:
                 id = os.path.splitext(os.path.basename(animation_definition_info["path"]))[0]
                 path = animation_definition_info["path"]
 
-                alpha = True
-                if "alpha" in animation_definition_info:
-                    alpha = animation_definition_info["alpha"]
-
+                alpha = animation_definition_info.get("alpha", True)
                 cls.animation_definitions[id] = {"path": path, "alpha": alpha}
 
     @classmethod

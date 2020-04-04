@@ -80,9 +80,9 @@ class RogueliteGame(PyGameApplication):
     def on_component_event(self, component, event):
         if event["name"] == "create_game_object":
             coords = event["coords"]
-            if "class" in event:
-                if event["class"] == "Enemy":
-                    self.add_enemy_game_object(event["game_object_def"], self.dungeon.tiles[coords[0]][coords[1]])
+            object_class = event.get("class", "None")
+            if object_class == "Enemy":
+                self.add_enemy_game_object(event["game_object_def"], self.dungeon.tiles[coords[0]][coords[1]])
             else:
                 self.add_game_object(event["game_object_def"], self.dungeon.tiles[coords[0]][coords[1]])
 

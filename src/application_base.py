@@ -2,7 +2,7 @@ class ApplicationConfig:
     def __init__(self):
         self.window_width = 1024
         self.window_height = 768
-        self.window_title = 'My new game'
+        self.window_title = 'Game'
 
 
 class ApplicationBase:

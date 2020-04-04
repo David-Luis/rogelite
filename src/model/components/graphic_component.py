@@ -16,6 +16,7 @@ class AnimationInfo:
         self.frame_count = 0
         self.current_frame = 0
         self.current_frame_time = 0.0
+        self.aabb = None
 
 class GraphicComponent(Component):
 
@@ -52,24 +53,17 @@ class GraphicComponent(Component):
 
                 #animation info
                 self._animation_info.name = animation_data["name"]
-                self._animation_info.loop = False
-                if "playTimes" in animation_data["armature"][0]["animation"][0]:
-                    animation_data["armature"][0]["animation"][0]["playTimes"]
+                self._animation_info.loop = animation_data["armature"][0]["animation"][0].get("playTimes", False)
                 self._animation_info.aabb = animation_data["armature"][0]["aabb"].copy()
                 self._animation_info.time_per_frame = 1.0 / animation_data["armature"][0]["frameRate"]
 
                 for frame in animation_data["armature"][0]["skin"][0]["slot"][0]["display"]:
-                    if "path" in frame:
-                        texture_id = frame["path"]
-                    else:
-                        texture_id = frame["name"]
+                    texture_id = frame.get("path", frame["name"])
                     self._animation_info.frames.append(self._animation_info.sub_textures[texture_id])
 
                 self._animation_info.frame_count = len(self._animation_info.frames)
 
-
     def update(self, delta_time):
-        #todo: missing time management
         if self._animated:
 
             self._animation_info.current_frame_time += delta_time
@@ -91,7 +85,7 @@ class GraphicComponent(Component):
         return None
 
     def get_size(self):
-        return (self._animation_info.aabb["width"], self._animation_info.aabb["height"])
+        return self._animation_info.aabb["width"], self._animation_info.aabb["height"]
 
 
 
