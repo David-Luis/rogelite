@@ -13,6 +13,7 @@ class RogueliteGame(PyGameApplication):
     def __init__(self, config):
         PyGameApplication.__init__(self, config)
         self._game_objects = []
+        self.dungeon = None
 
     def _init_model(self):
         self.dungeon = DungeonLoader.load_from_tsv("data/dungeons/test_dungeon.tsv")
@@ -72,10 +73,12 @@ class RogueliteGame(PyGameApplication):
 
 
     def _render(self):
-        self.game_graphics.draw(self.dungeon, self.main_surface, self.delta_time)
 
-        if self.game_graphics.show_debug_graphics:
-            self.game_graphics.draw_debug(self.dungeon, self.main_surface)
+        if self.dungeon:
+            self.game_graphics.draw(self.dungeon, self.main_surface, self.delta_time)
+
+            if self.game_graphics.show_debug_graphics:
+                self.game_graphics.draw_debug(self.dungeon, self.main_surface)
 
     def on_component_event(self, component, event):
         if event["name"] == "create_game_object":

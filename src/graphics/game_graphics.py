@@ -1,6 +1,4 @@
 from src.model.tile import TileType
-from src.graphics.sprite import Sprite
-from src.graphics.sprite_animated import SpriteAnimated
 from src.game.assets_manager import AssetsManager
 
 import pygame
@@ -51,15 +49,15 @@ class GameGraphics:
                         for graphic_component in game_object.get_components_of_type("GraphicComponent"):
 
                             if graphic_component.layer == layer and graphic_component.visible:
-                                if graphic_component._animated:
+                                if graphic_component.animated:
                                     sprite = AssetsManager.get_animation(graphic_component.graphic_id)
                                 else:
                                     sprite = AssetsManager.get_sprite(graphic_component.graphic_id)
 
-                                if graphic_component._animated:
+                                if graphic_component.animated:
                                     height = graphic_component.get_size()[1]
                                 else:
-                                    height =  sprite.get_current_surface().get_rect().size[1]
+                                    height =  sprite.get_surface().get_rect().size[1]
                                 draw_x = position_x * self.tile_size + self.camera_x + graphic_component.local_pos[0]
                                 draw_y = position_y * self.tile_size + + self.camera_y - (height - self.tile_size) + graphic_component.local_pos[1]
 
@@ -93,7 +91,7 @@ class GameGraphics:
             white = (255, 255, 255)
             text = self.debug_font.render("{}".format(life), True, white)
             text_rect = text.get_rect()
-            size = AssetsManager.get_sprite(graphic_component.graphic_id).get_current_surface().get_rect().size
+            size = AssetsManager.get_sprite(graphic_component.graphic_id).get_surface().get_rect().size
             height = size[1]
             draw_x = position_x * self.tile_size + self.camera_x + self.tile_size*0.5
             draw_y = position_y * self.tile_size + self.camera_y + self.tile_size - height - 5

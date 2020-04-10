@@ -8,4 +8,4 @@ if __name__ == '__main__':
     applicationConfig.window_title = "Roguelite"
     game = RogueliteGame(applicationConfig)
     game.initialize()
-    game.game_loop()
+    game.start_game_loop()

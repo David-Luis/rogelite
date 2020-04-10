@@ -18,6 +18,7 @@ class PyGameApplication(ApplicationBase):
         self.display_surface = None
         self.main_surface = None
         self.running = True
+        self.is_initialized = False
         self.timer = pygame.time.Clock()
         self.delta_time = 0
         self.ticks_last_frame = 0
@@ -137,12 +138,17 @@ class PyGameApplication(ApplicationBase):
         GL.shaders.glUseProgram(0)
         GL.glBindVertexArray(0)
 
+    def _show_window(self):
+        self.display_surface = pygame.display.set_mode(
+            (self.application_config.window_width, self.application_config.window_height),
+            pygame.constants.DOUBLEBUF | pygame.constants.OPENGL)
+
     def _init_engine(self):
         self.running = True
         pygame.init()
         pygame.display.set_caption(self.application_config.window_title)
 
-        self.display_surface = pygame.display.set_mode(( self.application_config.window_width,  self.application_config.window_height), pygame.constants.DOUBLEBUF | pygame.constants.OPENGL)
+        self._show_window()
         self.main_surface = pygame.Surface(( self.application_config.window_width,  self.application_config.window_height))
 
         GL.glClearColor(0.0, 0.6, 0.75, 1)
@@ -162,7 +168,6 @@ class PyGameApplication(ApplicationBase):
         ticks = pygame.time.get_ticks()
         self.delta_time = (ticks - self.ticks_last_frame) / 1000.0
         self.ticks_last_frame = ticks
-        pass
 
     def _render(self):
         pass
@@ -172,24 +177,26 @@ class PyGameApplication(ApplicationBase):
 
         self._render()
         self._render_game_texture()
-        pygame.display.flip()
 
     def _cleanup(self):
         pygame.quit()
 
     def initialize(self):
         self._init_engine()
+        self.is_initialized = True
 
-    def game_loop(self):
+    def start_game_loop(self):
         while self.running:
             self.timer.tick(60)
-
-            for event in pygame.event.get():
-                self._on_event(event)
-
-            self._update()
-            self._on_render()
-
+            self.game_loop()
+            pygame.display.flip()
         self._cleanup()
+
+    def game_loop(self):
+        for event in pygame.event.get():
+            self._on_event(event)
+
+        self._update()
+        self._on_render()
 
 

@@ -1,11 +1,10 @@
-- sprite sheet:
-	- quitar la diferencia de sprite y spriteanimated, lo debería saber a partir del _animated del gameobject, o simplemente que pregunte get_current_frame
-
-- calidad
-
 - editor de mazmorras para hacer pruebas
-	ver como integrarlo en mi herencia de clases
-	https://github.com/mrexodia/pygame_qt/blob/master/game.py
+	pintar:
+		- suelo
+		- pared
+		- player
+		- enemigos
+	mover camara (zoom? ow mamamamamamam)
 
 - enemigo más avanzado
 	- sigue al player de verdad
@@ -15,6 +14,6 @@
 	
 - añadir el concepto de escena, que tiene unos assets concretos que cargar y descagar
 - poderes y maná
-- para evitar cargar de un fichero, 1. guardar en memoria, 2. cargar enemigos, 3. borrar memoria
+- para evitar cargar de un fichero siempre que se añade un enemigo, 1. guardar en memoria, 2. cargar enemigos, 3. borrar memoria
 - tema de las layers
 

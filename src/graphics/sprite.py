@@ -2,7 +2,7 @@ import pygame
 
 
 class Sprite:
-    def __init__(self, file, with_alpha=True):
+    def __init__(self, file, with_alpha = True):
         if with_alpha:
             self.surface = pygame.image.load(file).convert_alpha()
         else:
@@ -11,16 +11,36 @@ class Sprite:
         self._subtexture_rectangle = None
         self._visible = True
 
-    def get_current_surface(self):
+    def get_surface(self):
         return self.surface
 
     def blit(self, display_surface, position, graphic_component=None):
-        if self._visible:
-            display_surface.blit(self.get_current_surface(), position, area=self._subtexture_rectangle)
+        if not self._visible:
+            return
+
+        if graphic_component and graphic_component.animated:
+            current_frame = graphic_component.get_current_frame()
+            x = current_frame["x"]
+            y = current_frame["y"]
+            width = current_frame["width"]
+            height = current_frame["height"]
+
+            self._subtexture_rectangle = (x, y, width, height)
+
+        display_surface.blit(self.surface, position, area=self._subtexture_rectangle)
 
     def blit_flipped(self, display_surface, position, graphic_component=None):
-        if self._visible:
-            display_surface.blit(pygame.transform.flip(self.get_current_surface(), True, False), position)
+        if not self._visible:
+            return
 
-    def update(self, delta_time):
-        pass
+        if graphic_component and graphic_component.animated:
+            current_frame = graphic_component.get_current_frame()
+            x = current_frame["x"]
+            y = current_frame["y"]
+            width = current_frame["width"]
+            height = current_frame["height"]
+
+            self._subtexture_rectangle = (x, y, width, height)
+
+        display_surface.blit(pygame.transform.flip(self.surface, True, False), position)
+

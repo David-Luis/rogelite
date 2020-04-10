@@ -23,13 +23,13 @@ class GraphicComponent(Component):
     def __init__(self, game_object, definition):
         Component.__init__(self, game_object, "GraphicComponent")
         self.graphic_id = definition["texture_id"]
-        self._animated = "is_animated" in definition and definition["is_animated"]
+        self.animated = "is_animated" in definition and definition["is_animated"]
         self.local_pos = [0, 0]
         self.layer = 1
         self.flipped = False
         self.visible = True
 
-        if self._animated:
+        if self.animated:
             self._load_animation_data(definition["animation_data"])
 
     def _load_animation_data(self, file_path):
@@ -64,7 +64,7 @@ class GraphicComponent(Component):
                 self._animation_info.frame_count = len(self._animation_info.frames)
 
     def update(self, delta_time):
-        if self._animated:
+        if self.animated:
 
             self._animation_info.current_frame_time += delta_time
 
@@ -79,7 +79,7 @@ class GraphicComponent(Component):
                         self._animation_info.current_frame -= 1
 
     def get_current_frame(self):
-        if self._animated:
+        if self.animated:
             return self._animation_info.frames[self._animation_info.current_frame]
 
         return None

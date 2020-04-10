@@ -1,5 +1,4 @@
 from src.graphics.sprite import Sprite
-from src.graphics.sprite_animated import SpriteAnimated
 
 import json
 import os
@@ -50,7 +49,7 @@ class AssetsManager:
             return cls.animations[id]
         elif id in cls.animation_definitions:
             definition = cls.animation_definitions[id]
-            cls.animations[id] = SpriteAnimated(definition["path"], definition["alpha"])
+            cls.animations[id] = Sprite(definition["path"], definition["alpha"])
             return cls.animations[id]
         else:
             return None
