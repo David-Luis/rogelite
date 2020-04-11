@@ -60,9 +60,9 @@ class EditorApplication(RogueliteGame):
             self.game_graphics.increase_target_camera_position(movement_x * increase_factor,
                                                                movement_y * increase_factor)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_KP_MINUS:
-            self.camera_3d.zoom -= 0.05
+            self.add_zoom(-0.05)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_KP_PLUS:
-            self.camera_3d.zoom += 0.05
+            self.add_zoom(0.05)
 
     def _on_event(self, event):
         PyGameApplication._on_event(self, event)
@@ -80,9 +80,13 @@ class EditorApplication(RogueliteGame):
         self.ui_manager.update(self.delta_time)
         self.game_graphics.update()
 
-    def _render(self):
-        RogueliteGame._render(self)
+    def _on_render(self):
+        self.main_surface.fill((0, 0, 0))
+
+        self._render()
         self.ui_manager.draw_ui(self.main_surface)
+
+        self._render_game_texture()
 
     def _init_model(self):
         pass

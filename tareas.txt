@@ -4,7 +4,7 @@
 		- pared
 		- player
 		- enemigos
-	mover camara (zoom? ow mamamamamamam)
+	show zoom value in the ui
 
 - enemigo más avanzado
 	- sigue al player de verdad

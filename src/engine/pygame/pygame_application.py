@@ -158,6 +158,11 @@ class PyGameApplication(ApplicationBase):
         self._create_render_texture()
         self._create_shaders()
 
+    def add_zoom(self, value):
+        self.camera_3d.zoom += value
+        self.main_surface = pygame.Surface(
+            (self.application_config.window_width * 1/self.camera_3d.zoom, self.application_config.window_height * 1/self.camera_3d.zoom))
+
     def _on_event(self, event):
         if event.type == pygame.QUIT:
             self.running = False
