@@ -11,8 +11,8 @@ class GameGraphics:
         self.show_debug_graphics = True
         self.tile_size = 64
 
-        self.follow_game_object_x = 0
-        self.follow_game_object_y = 0
+        self.target_camera_x = 0
+        self.target_camera_y = 0
         self.camera_x = 0
         self.camera_y = 0
 
@@ -21,12 +21,20 @@ class GameGraphics:
         self.layers = [0,1]
 
     def follow_game_object(self, game_object, window_width, window_height):
-        self.follow_game_object_x = (-game_object.tile.coords[1] * self.tile_size) + window_width / 2 - self.tile_size / 2
-        self.follow_game_object_y = (-game_object.tile.coords[0] * self.tile_size) + window_height / 2
+        self.target_camera_x = (-game_object.tile.coords[1] * self.tile_size) + window_width / 2 - self.tile_size / 2
+        self.target_camera_y = (-game_object.tile.coords[0] * self.tile_size) + window_height / 2
+
+    def set_target_camera_position(self, position_x, position_y):
+        self.target_camera_x = position_x
+        self.target_camera_y = position_y
+
+    def increase_target_camera_position(self, position_x, position_y):
+        self.target_camera_x += position_x
+        self.target_camera_y += position_y
 
     def update(self):
-        self.camera_x += (self.follow_game_object_x - self.camera_x) * 0.1
-        self.camera_y += (self.follow_game_object_y - self.camera_y) * 0.1
+        self.camera_x += (self.target_camera_x - self.camera_x) * 0.1
+        self.camera_y += (self.target_camera_y - self.camera_y) * 0.1
 
     def draw(self, dungeon, display_surface, delta_time):
 

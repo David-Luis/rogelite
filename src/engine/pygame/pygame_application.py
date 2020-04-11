@@ -8,7 +8,7 @@ from OpenGL.GL import shaders
 from OpenGL.raw.GL import _types
 
 from src.application_base import ApplicationBase
-from src.engine.pygame.Camera import Camera
+from src.engine.pygame.camera import Camera
 
 
 class PyGameApplication(ApplicationBase):

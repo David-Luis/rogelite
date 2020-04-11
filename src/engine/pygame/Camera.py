@@ -18,6 +18,7 @@ class Camera():
         self.speed = 10.0
         self.sensitivity = 0.1
         self.fov = 45.0
+
         self.zoom = 1.0
 
         self._update_camera_vectors()
@@ -29,7 +30,7 @@ class Camera():
         return glm.perspective(glm.radians(self.fov), self.windows_width / self.windows_height, -1, 1)
 
     def get_ortogonal_matrix(self):
-        return glm.ortho(-0.5 * 1.0/self.zoom, 0.5 * 1.0/self.zoom, -0.5 * 1.0/self.zoom, 0.5 * 1.0/self.zoom)
+        return glm.ortho(-0.5 * 1.0, 0.5 * 1.0, -0.5 * 1.0, 0.5 * 1.0)
 
     def _update_camera_vectors(self):
         front = glm.vec3()
