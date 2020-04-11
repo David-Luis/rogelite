@@ -31,9 +31,9 @@ class PyGameApplication(ApplicationBase):
         GL.glTexParameter(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST)
         GL.glTexParameter(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST)
 
-    def _use_pygame_texture(self):
-        w, h = self.main_surface.get_size()
-        texture_info = pygame.image.tostring(self.main_surface, "RGBA", 1)
+    def _use_pygame_texture(self, surface):
+        w, h = surface.get_size()
+        texture_info = pygame.image.tostring(surface, "RGBA", 1)
         GL.glTexImage2D(GL.GL_TEXTURE_2D, 0, 4, w, h, 0, GL.GL_RGBA, GL.GL_UNSIGNED_BYTE, texture_info)
 
     def _create_render_plane(self):
@@ -113,15 +113,13 @@ class PyGameApplication(ApplicationBase):
                 """, GL.GL_FRAGMENT_SHADER)
         self.shader = GL.shaders.compileProgram(vertex_shader, fragment_shader)
 
-    def _render_game_texture(self):
-        GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
-
+    def _render_game_texture(self, texture, surface):
         model_transform = glm.mat4()
-        model_transform = glm.translate(model_transform, glm.vec3(0.0, 0.0, -1.0))
+        model_transform = glm.translate(model_transform, glm.vec3(0.0, 0.0, 0.0))
         GL.shaders.glUseProgram(self.shader)
 
-        self._use_pygame_texture()
-        GL.glBindTexture(GL.GL_TEXTURE_2D, self.game_texture)
+        self._use_pygame_texture(surface)
+        GL.glBindTexture(GL.GL_TEXTURE_2D, texture)
 
         transform_loc = GL.glGetUniformLocation(self.shader, "model")
         GL.glUniformMatrix4fv(transform_loc, 1, GL.GL_FALSE, glm.value_ptr(model_transform))
@@ -133,6 +131,7 @@ class PyGameApplication(ApplicationBase):
         GL.glUniformMatrix4fv(projection_loc, 1, GL.GL_FALSE, glm.value_ptr(self.camera_3d.get_ortogonal_matrix()))
 
         GL.glBindVertexArray(self.VAO)
+
         GL.glDrawElements(GL.GL_TRIANGLES, self.index_data.size, GL.GL_UNSIGNED_INT, None)
 
         GL.shaders.glUseProgram(0)
@@ -178,10 +177,11 @@ class PyGameApplication(ApplicationBase):
         pass
 
     def _on_render(self):
-        self.main_surface.fill((0, 0, 0))
+        GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
+        self.main_surface.fill((0, 0.6*255, 0.75*255))
 
         self._render()
-        self._render_game_texture()
+        self._render_game_texture(self.game_texture, self.main_surface)
 
     def _cleanup(self):
         pygame.quit()

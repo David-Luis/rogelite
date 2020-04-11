@@ -30,7 +30,8 @@ class Camera():
         return glm.perspective(glm.radians(self.fov), self.windows_width / self.windows_height, -1, 1)
 
     def get_ortogonal_matrix(self):
-        return glm.ortho(-0.5 * 1.0, 0.5 * 1.0, -0.5 * 1.0, 0.5 * 1.0)
+        screen_value = 0.5
+        return glm.ortho(-screen_value, screen_value, -screen_value, screen_value)
 
     def _update_camera_vectors(self):
         front = glm.vec3()

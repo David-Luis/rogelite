@@ -9,6 +9,7 @@ import pygame_gui
 from pygame_gui.windows import UIFileDialog
 import pygame
 import glm
+from OpenGL import GL
 
 class EditorApplication(RogueliteGame):
     def __init__(self, config):
@@ -19,6 +20,9 @@ class EditorApplication(RogueliteGame):
 
     def _init_engine(self):
         RogueliteGame._init_engine(self)
+
+        self.ui_surface = pygame.Surface(
+            (self.application_config.window_width, self.application_config.window_height))
         self.ui_manager = pygame_gui.UIManager((self.application_config.window_width, self.application_config.window_height), 'editor/data/themes/quick_theme.json')
 
     def initialize(self):
@@ -32,7 +36,6 @@ class EditorApplication(RogueliteGame):
                                                         text='Save',
                                                         manager=self.ui_manager)
 
-        self.dungeon = DungeonLoader.load_from_tsv("data/dungeons/test_dungeon.tsv")
         self.camera_movement_enabled = False
 
     def _on_button_pressed(self, event):
@@ -81,12 +84,20 @@ class EditorApplication(RogueliteGame):
         self.game_graphics.update()
 
     def _on_render(self):
-        self.main_surface.fill((0, 0, 0))
+        GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
+        self.main_surface.fill((0, 0.6 * 255, 0.75 * 255))
+        self.ui_surface.fill(self.ui_manager.get_theme().get_colour(None, None, 'dark_bg'))
+
+        self.ui_manager.draw_ui(self.ui_surface)
+        GL.glViewport(0, 0, (int)(self.application_config.window_width),
+                      (int)(self.application_config.window_height))
+        self._render_game_texture(self.game_texture, self.ui_surface)
 
         self._render()
-        self.ui_manager.draw_ui(self.main_surface)
+        GL.glViewport(0, 0, (int)(self.application_config.window_width * 0.9),
+                      (int)(self.application_config.window_height * 0.9))
 
-        self._render_game_texture()
+        self._render_game_texture(self.game_texture, self.main_surface)
 
     def _init_model(self):
         pass
